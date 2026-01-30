@@ -1,0 +1,14 @@
+module Song where
+import Daml.Script
+import DA.Foldable (mapA_)
+
+song = [("do", "a deer, a female deer"), ("re", "a drop of golden sun"), ("mi", "a name, I call myself"), ("fa", "a long long way to run")]
+notes = map fst song
+meanings = map snd song
+
+songScript : Script ()
+songScript = do
+    debug "Notes:"
+    mapA_ debug notes
+    debug "Meanings:"
+    mapA_ debug meanings
