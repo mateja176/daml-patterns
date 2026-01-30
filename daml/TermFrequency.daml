@@ -1,0 +1,20 @@
+module TermFrequency where
+import Daml.Script
+import DA.Text (words)
+
+frequency : Text -> Text -> Decimal
+frequency term text =
+    let ws = words text
+        wordsLength = length ws
+        termCount = length (filter (term ==) ws)
+    in if wordsLength == 0 then 0.0 else intToDecimal termCount / intToDecimal wordsLength
+
+termFrequencyScript : Script ()
+termFrequencyScript = do
+    let text = "the the the the quick brown fox jumps over the lazy dog"
+    let term1 = "the"
+    let term2 = "fox"
+    let freq1 = frequency term1 text
+    let freq2 = frequency term2 text
+    debug $ "Frequency of '" <> term1 <> "': " <> show freq1
+    debug $ "Frequency of '" <> term2 <> "': " <> show freq2
