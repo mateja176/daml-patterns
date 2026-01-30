@@ -1,0 +1,18 @@
+module DoubleMe where
+import Daml.Script
+import DA.Assert
+
+doubleMe : Int -> Int
+doubleMe x = x * 2
+doubleUs : Int -> Int -> Int
+doubleUs x y = x * 2 + y * 2
+
+testDoubleMe : Script ()
+testDoubleMe = do
+    let resultMe = doubleMe 3
+    debug $ resultMe
+    let resultUs = doubleUs 3 4
+    debug $ resultUs
+    let resultInfix = 3 `doubleUs` 4
+    debug $ resultInfix
+    resultUs === resultInfix
