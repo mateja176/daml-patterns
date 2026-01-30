@@ -1,0 +1,15 @@
+module QuadFunction where
+import Daml.Script
+import DA.Assert
+
+quadFunction : Int -> Int -> Int -> Int
+quadFunction x y z = 3 * x * x + 2 * y + z
+
+testQuadFunction : Script ()
+testQuadFunction = do
+    let result = quadFunction 1 2 3
+    debug $ result
+    let quadLambda = \x y z -> 3 * x * x + 2 * y + z
+    let resultLambda = quadLambda 1 2 3
+    result === 10
+    result === resultLambda
